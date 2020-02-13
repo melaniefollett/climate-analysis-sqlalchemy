@@ -28,6 +28,8 @@ def index():
         "/api/v1.0/precipitation<br />"
         "/api/v1.0/stations<br />"
         "/api/v1.0/tobs<br />"
+        "/api/v1.0/<start><br />"
+        "/api/v1.0/<start><end><br />"
     )
 
 @app.route("/api/v1.0/precipitation")
@@ -69,6 +71,25 @@ def tobs():
         all_temps.append(temp_dict)
 
     return jsonify(all_temps)
+
+@app.route("/api/v1.0/<start>")
+def start_date(start):
+    session = Session(engine)
+    results = session.query(func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)).\
+        filter(Measurement.date >= start).all()
+    session.close()
+    
+    return jsonify(results)
+
+
+@app.route("/api/v1.0/<start>/<end>")
+def start_end_date(start, end):
+    session = Session(engine)
+    results = session.query(func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)).\
+        filter(Measurement.date > start, Measurement.date < end).all()
+    session.close()
+
+    return jsonify(results)
 
 if __name__ == "__main__":
     app.run(debug=True)
