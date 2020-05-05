@@ -4,7 +4,7 @@
 For this project I used Python and SQLAlchemy to do basic climate analysis and data exploration of a Hawaii weather database. 
 
 # Database Setup
-I used SQLAlchemy create_engine to connect to the sqlite database. I then used SQLAlchemy automap_base() to reflect the tables into classes and saveed a reference to those classes called Station and Measurement.  Next I performed a variety of analyses on the data.
+I used SQLAlchemy create_engine to connect to the sqlite database. I then used SQLAlchemy automap_base() to reflect the tables into classes and saved a reference to those classes called Station and Measurement.  Next I performed a variety of analyses on the data.
 
 # Precipitation Analysis
 First I designed a query to retrieve the last 12 months of precipitation data, selecting only the date and prcp values.  Then I loaded the query results into a Pandas DataFrame and set the index to the date column.  I sorted the DataFrame values by date and plotted the results using the DataFrame plot method.  Finally, I used Pandas to print the summary statistics for the precipitation data.
